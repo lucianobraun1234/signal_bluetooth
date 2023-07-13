@@ -37,10 +37,10 @@ class _Inicio extends State<Inicio> {
   void initState() {
     super.initState();
 
-    _asyncMethod();
+    _inicio();
   }
 
-  _asyncMethod() async {
+  _inicio() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     //prefs.setString('credenciais',resultado2);
@@ -162,17 +162,22 @@ class _Inicio extends State<Inicio> {
                                         lista=[];
                                         lista1=[];
                                       });
+
                                       List<BluetoothDiscoveryResult> results = <BluetoothDiscoveryResult>[];
                                       var nome1='';
                                       var endereco='';
                                       double rssi=0;
                                       int rssi1=0;
                                       premodalbluetooth(context);
+                                     // await FlutterBluetoothSerial.instance.cancelDiscovery();
 
-                                      void startDiscovery() {
-                                        var streamSubscription = FlutterBluetoothSerial.instance.startDiscovery().listen((r) {
+
+
+                                      var streamSubscription = FlutterBluetoothSerial.instance.startDiscovery().listen((r) {
                                           rssi=r.rssi.toDouble();
+                                          print("rssi puro:$rssi");
                                           rssi=rssi + 35;
+                                          print("rssi:$rssi");
                                           rssi=rssi/10;
                                           rssi1=rssi.round();
                                          endereco=r.device.address.toString();
@@ -197,12 +202,14 @@ class _Inicio extends State<Inicio> {
                                         });
 
                                         streamSubscription.onDone(() {
-                                          flutterBlue.stopScan();
+
                                           Navigator.pop(context);
                                           Modalbluetooth( context);
+                                          flutterBlue.stopScan();
                                           //Do something when the discovery process ends
                                         });
-                                      }
+
+
 // Stop scanning
 
 
@@ -435,23 +442,15 @@ class _Inicio extends State<Inicio> {
 
     // configura o button
     Widget okButton =
-    Scrollbar(
-        thumbVisibility: true,
-        controller: yourScrollController,
-        child:
-        Column(
-            children:[
-              Container(
-                width:MediaQuery.of(context).size.width/3,
-                height:MediaQuery.of(context).size.height/3,
-                child:CircularProgressIndicator(color:Colors.green)
+    Center(
+      child:
+      Container(
+          width:100,
+          height:100,
+          child:CircularProgressIndicator(color:Colors.green)
 
 
-              ),
-
-
-            ]
-        )
+      ),
     );
     // configura o  AlertDialog
     AlertDialog alerta = AlertDialog(
@@ -497,7 +496,6 @@ class Alerta{
   }
 
 }
-
 
 
 
