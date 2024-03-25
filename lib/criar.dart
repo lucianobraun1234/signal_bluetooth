@@ -732,7 +732,7 @@ class _Inicio extends State<Inicio> {
 
 
 
-                          }, icon: const Icon(Icons.on_device_training),)
+                          }, icon: const Icon(Icons.play_arrow),)
                       ),
 
                       SizedBox(height:20),
@@ -758,7 +758,7 @@ class _Inicio extends State<Inicio> {
                               }
 
 
-                            }, icon: const Icon(Icons.offline_pin_rounded),)
+                            }, icon: const Icon(Icons.stop),)
                       ),
                       SizedBox(height:20),
                   Scrollbar(
